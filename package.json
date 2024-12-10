@@ -1,17 +1,23 @@
 {
   "dependencies": {
+    "body-parser": "^1.20.3",
+    "cheerio": "^1.0.0",
+    "dotenv": "^16.4.7",
     "express": "^4.21.2",
-    "mysql": "^2.18.1"
+    "mongoose": "^8.8.4",
+    "mysql": "^2.18.1",
+    "node": "^22.12.0",
+    "nvm": "^0.0.4"
   },
   "name": "wsd-assignment-03",
   "version": "1.0.0",
   "main": "app.js",
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "## Project Description This project implements a backend server to scrape job postings from Saramin, store them in MongoDB, and provide RESTful APIs for job management.",
+  "devDependencies": {}
 }
