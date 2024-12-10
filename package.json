@@ -4,6 +4,7 @@
     "cheerio": "^1.0.0",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.8.4",
     "mysql": "^2.18.1",
     "node": "^22.12.0",
@@ -18,6 +19,5 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "## Project Description This project implements a backend server to scrape job postings from Saramin, store them in MongoDB, and provide RESTful APIs for job management.",
-  "devDependencies": {}
+  "description": "## Project Description This project implements a backend server to scrape job postings from Saramin, store them in MongoDB, and provide RESTful APIs for job management."
 }
