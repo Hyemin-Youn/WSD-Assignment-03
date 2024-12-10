@@ -1,5 +1,7 @@
 {
   "dependencies": {
+    "axios": "^1.7.9",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.3",
     "cheerio": "^1.0.0",
     "dotenv": "^16.4.7",
@@ -14,10 +16,15 @@
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "dev": "nodemon app.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "## Project Description This project implements a backend server to scrape job postings from Saramin, store them in MongoDB, and provide RESTful APIs for job management."
+  "description": "## Project Description This project implements a backend server to scrape job postings from Saramin, store them in MongoDB, and provide RESTful APIs for job management.",
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  }
 }

@@ -1,38 +1,30 @@
 const express = require('express');
+const axios = require('axios');
+const cheerio = require('cheerio');
+
 const router = express.Router();
 
-// 공고 목록 조회
-router.get('/', (req, res) => {
-    // 페이지네이션 및 필터링 로직
-    res.json({ jobs: [] });
-});
+// 사람인 채용공고 크롤링 API
+router.get('/scrape', async (req, res) => {
+    try {
+        const url = 'https://www.saramin.co.kr/zf_user/jobs/list/job-category'; // 대상 URL
+        const { data } = await axios.get(url); // HTTP GET 요청
+        const $ = cheerio.load(data); // HTML 데이터 로드
 
-// 공고 상세 조회
-router.get('/:id', (req, res) => {
-    const jobId = req.params.id;
-    // 특정 공고 상세 정보 로직
-    res.json({ job: { id: jobId, title: 'Sample Job' } });
-});
+        const jobs = [];
+        $('.job_tit a').each((index, element) => {
+            const title = $(element).text().trim(); // 공고 제목
+            const link = $(element).attr('href'); // 공고 링크
+            if (title && link) {
+                jobs.push({ title, link: `https://www.saramin.co.kr${link}` });
+            }
+        });
 
-// 공고 등록
-router.post('/', (req, res) => {
-    const { title, description } = req.body;
-    // 공고 등록 로직
-    res.status(201).json({ message: 'Job created successfully' });
-});
-
-// 공고 수정
-router.put('/:id', (req, res) => {
-    const jobId = req.params.id;
-    // 공고 수정 로직
-    res.json({ message: `Job ${jobId} updated successfully` });
-});
-
-// 공고 삭제
-router.delete('/:id', (req, res) => {
-    const jobId = req.params.id;
-    // 공고 삭제 로직
-    res.json({ message: `Job ${jobId} deleted successfully` });
+        res.json({ jobs }); // 크롤링된 데이터를 반환
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Failed to scrape data' });
+    }
 });
 
 module.exports = router;
