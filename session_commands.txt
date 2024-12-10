@@ -1,0 +1,349 @@
+    1  rm -rf ~/.bash_history
+    2  sudo shutdown -h now
+    3  sudo su
+    4  netstat -avnlp
+    5  ifconfig
+    6  cd "/home/ubuntu"
+    7  sudo -s
+    8  sudo -s
+    9  cd "/usr/local/v3net/log"
+   10  sudo -s
+   11  sudo -s
+   12  ls
+   13  sudo shutdown -h now
+   14  sudo -s
+   15  ls
+   16  sudo shutdown -h now
+   17  cd "/home/ubuntu"
+   18  sudo -s
+   19  cd "/home/ubuntu"
+   20  sudo -s
+   21  cd "/home/ubuntu"
+   22  sudo -s
+   23  curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+   24  sudo apt-get install -y nodejs
+   25  node -v
+   26  npm -v
+   27  mkdir my-express-app
+   28  cd my-express-app
+   29  npm init -y
+   30  npm install express
+   31  scp -i yhmyhm.ppk -r ./WSD-Assignment-03 ubuntu@113.198.66.75:/home/ubuntu/
+   32  nano app.js
+   33  node app.js
+   34  pwd
+   35  nano app.js
+   36  cd /path/to/directory/
+   37  ls
+   38  node app.js
+   39  cd /path/to/WSD-Assignment-03
+   40  pwd
+   41  cd ..
+   42  cd C:\Users\hyemi\OneDrive\Desktop\WSD-Assignment-03
+   43  cd WSD-Assignment-03
+   44  cd ~/WSD-Assignment-03
+   45  cd
+   46  cd hyemi
+   47  cd ./WSD-Assignment-03
+   48  cd Desktop
+   49  cd Users/hyemi
+   50  scp -i yhmyhm.ppk -r "C:\Users\hyemi\OneDrive\Desktop\WSD-Assignment-03" ubuntu@113.198.66.75:/home/ubuntu/
+   51  ls /home/ubuntu/
+   52  ls
+   53  cd 
+   54  cd my-express-app
+   55  ls
+   56  nano app.js
+   57  scp -i "C:\Users\hyemi\Downloads\yhmyhm.ppk" -r "C:\Users\hyemi\OneDrive\Desktop\WSD-Assignment-03/*" ubuntu@113.198.66.75:/home/ubuntu/my-express-app/
+   58  scp -i "C:\Users\hyemi\OneDrive\Desktop\WSD-Assignment-03\yhmyhm.ppk" -r "C:\Users\hyemi\OneDrive\Desktop\WSD-Assignment-03" ubuntu@113.198.66.75:/home/ubuntu/
+   59  scp -i "C:\Users\hyemi\Cloud\yhmyhm.ppk" -r "C:\Users\hyemi\OneDrive\Desktop\WSD-Assignment-03" ubuntu@113.198.66.75:/home/ubuntu/
+   60  rm -rf /home/ubuntu/my-express-app/*
+   61  ls
+   62  cd ..
+   63  ls
+   64  -rf /home/ubuntu/*
+   65  rm -rf /home/ubuntu/my-express-app
+   66  ls
+   67  scp -i "C:\Users\hyemi\Cloud\yhmyhm.ppk" -r "C:\Users\hyemi\OneDrive\Desktop\WSD-Assignment-03/*" ubuntu@113.198.66.75:/home/ubuntu/my-express-app/
+   68  ssh -i "C:\Users\hyemi\Cloud\yhmyhm.ppk" ubuntu@113.198.66.75
+   69  scp -i "C:\Users\hyemi\Cloud\yhmyhm.ppk" -r "C:\Users\hyemi\OneDrive\Desktop\WSD-Assignment-03" ubuntu@113.198.66.75:/home/ubuntu/
+   70  ls
+   71  cd /home/ubuntu
+   72  cd home/ubuntu/
+   73  cd
+   74  mkdir WSD-Assignment-03
+   75  ls
+   76  cd WSD-Assignment-03
+   77  ls
+   78  scp -i "C:\Users\hyemi\Cloud\yhmyhm.ppk" -r "C:\Users\hyemi\OneDrive\Desktop\WSD-Assignment-03/*" ubuntu@113.198.66.75:/home/ubuntu/WSD-Assignment-03/
+   79  put C:\Users\hyemi\OneDrive\Desktop\WSD-Assignment-03 /home/ubuntu/
+   80  cd ..
+   81  ls
+   82  cd WSD-Assignment-03
+   83  ls
+   84  cd ..
+   85  put C:\Users\hyemi\OneDrive\Desktop\WSD-Assignment-03 /home/ubuntu/
+   86  scp -i "C:\Users\hyemi\Cloud\yhmyhm.ppk" -r "C:\Users\hyemi\OneDrive\Desktop\WSD-Assignment-03" ubuntu@113.198.66.75:/home/ubuntu/
+   87  ls /home/ubuntu/
+   88  sftp localhost
+   89  put C:/Users/hyemi/OneDrive/Desktop/WSD-Assignment-03/app.js /home/ubuntu/WSD-Assignment-03/
+   90  scp -i "C:\Users\hyemi\Downloads\yhmyhm.ppk" -r "C:\Users\hyemi\OneDrive\Desktop\WSD-Assignment-03" ubuntu@113.198.66.75:/home/ubuntu/
+   91  ssh -i "C:\Users\hyemi\Downloads\yhmyhm.ppk" ubuntu@113.198.66.75
+   92  ping 113.198.66.75
+   93  scp -i "C:\Users\hyemi\Downloads\yhmyhm.ppk" -r "C:\Users\hyemi\OneDrive\Desktop\WSD-Assignment-03" ubuntu@113.198.66.75:/home/ubuntu/
+   94  ls /home/ubuntu/WSD-Assignment-03
+   95  ls
+   96  ls /home/ubuntu/WSD-Assignment-03
+   97  sudo systemctl status ssh
+   98  scp -P 7777 -i "C:\Users\hyemi\Downloads\yhmyhm.ppk" -r "C:\Users\hyemi\OneDrive\Desktop\WSD-Assignment-03" ubuntu@113.198.66.75:/home/ubuntu/
+   99  scp -P 7777 -i "C:/Users/hyemi/Downloads/yhmyhm.ppk" -r "C:/Users/hyemi/OneDrive/Desktop/WSD-Assignment-03" ubuntu@113.198.66.75:/home/ubuntu/
+  100  sudo ufw status
+  101  sudo ufw allow 7777/tcp
+  102  sudo nano /etc/ssh/sshd_config
+  103  telnet 113.198.66.75 7777
+  104  sudo nano /etc/ssh/sshd_config
+  105  sudo systemctl restart ssh
+  106  scp -P 7777 -i "C:/Users/hyemi/Downloads/yhmyhm.ppk" -r "C:/Users/hyemi/OneDrive/Desktop/WSD-Assignment-03" ubuntu@113.198.66.75:/home/ubuntu/
+  107  ssh -p 7777 -i "C:/Users/hyemi/Downloads/yhmyhm.ppk" ubuntu@113.198.66.75
+  108  sudo ufw enable
+  109  sudo ufw allow 7777/tcp
+  110  sudo systemctl restart ssh
+  111  telnet 113.198.66.75 7777
+  112  sudo nano /etc/ssh/sshd_config
+  113  sudo systemctl restart ssh
+  114  sudo ufw status
+  115  sudo netstat -tuln | grep 7777
+  116  scp -P 7777 -i "C:/Users/hyemi/Downloads/yhmyhm.ppk" -r "C:/Users/hyemi/OneDrive/Desktop/WSD-Assignment-03" ubuntu@113.198.66.75:/home/ubuntu/
+  117  sudo tail -f /var/log/auth.log
+  118  curl ifconfig.me
+  119  sudo netstat -tuln | grep 7777
+  120  sudo ufw status
+  121  scp -P 7777 -i "C:/Users/hyemi/Downloads/yhmyhm.ppk" -r "C:/Users/hyemi/OneDrive/Desktop/WSD-Assignment-03" ubuntu@113.198.66.75:/home/ubuntu/
+  122  curl ifconfig.me
+  123  sudo nano /etc/ssh/sshd_config
+  124  sudo systemctl restart ssh
+  125  scp -P 7777 -i "C:/Users/hyemi/Downloads/yhmyhm.ppk" -r "C:/Users/hyemi/OneDrive/Desktop/WSD-Assignment-03" ubuntu@113.198.66.75:/home/ubuntu/
+  126  sudo nano /etc/ssh/sshd_config
+  127  scp -P 7777 -i "C:\Users\hyemi\Downloads\yhmyhm.ppk" -r "C:\Users\hyemi\OneDrive\Desktop\WSD-Assignment-03" ubuntu@113.198.66.75:/home/ubuntu/
+  128  sudo systemctl status ssh
+  129  ssh -p 7777 -i "C:\Users\hyemi\Downloads\yhmyhm.ppk" ubuntu@113.198.66.75
+  130  ping 113.198.66.75
+  131  telnet 113.198.66.75 7777
+  132  sudo nano /etc/ssh/sshd_config
+  133  telnet 113.198.66.75 7777
+  134  ping 113.198.66.75
+  135  telnet 113.198.66.75 7777
+  136  telnet 113.198.66.75 22
+  137  node -v
+  138  npm -v
+  139  nvm -v
+  140  apt install nvm
+  141  sudo apt~get install nvm
+  142  sudo apt install nvm
+  143  nvm -v
+  144  sudo apt install nvm
+  145  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
+  146  export NVM_DIR="$HOME/.nvm"
+  147  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+  148  nvm --version
+  149  node -v
+  150  npm -v
+  151  sudo nano /etc/ssh/sshd_config
+  152  sudo ufw status
+  153  sudo tail -f /var/log/auth.log
+  154  sudo systemctl status ssh
+  155  telnet 113.198.66.75 7777
+  156  ssh -p 22 -i "C:/Users/hyemi/Downloads/yhmyhm.ppk" ubuntu@113.198.66.75
+  157  sudo nano /etc/ssh/sshd_config
+  158  ssh -p 22 -i "C:/Users/hyemi/Downloads/yhmyhm.ppk" ubuntu@113.198.66.75
+  159  sudo nano /etc/ssh/sshd_config
+  160  ssh -p 19015 -i "C:/Users/hyemi/Downloads/yhmyhm.ppk" ubuntu@113.198.66.75
+  161  sudo systemctl status ssh
+  162  sudo systemctl restart ssh
+  163  chmod 600 "C:/Users/hyemi/Downloads/yhmyhm.ppk"
+  164  node -v
+  165  npm -v
+  166  nvm -v
+  167  sudo netstat -tuln | grep 3000
+  168  sudo netstat -tuln | grep 7777
+  169  ps aux | grep node
+  170  node app.js
+  171  mkdir my-express-app
+  172  ls
+  173  cd myexpress-app
+  174  cd mh-express-app
+  175  cd my-express-app
+  176  ls
+  177  nano app.js
+  178  node app.js
+  179  nano app.js
+  180  node app.js
+  181  ps aux | grep node
+  182  node app.js
+  183  [200~sudo ufw status
+  184  ~sudo ufw status
+  185  sudo ufw status
+  186  sudo ufw allow 3000
+  187  sudo netstat -tuln | grep 3000
+  188  nano app.js
+  189  npm install express
+  190  node app.js
+  191  sudo netstat -tuln | grep 3000
+  192  curl http://localhost:3000
+  193  sudo ufw status
+  194  nano app.js
+  195  node app.js
+  196  curl http://113.198.66.75:3000
+  197  nano app.js
+  198  curl http://0.0.0.0:3000
+  199  curl http://113.198.66.75:3000
+  200  sudo nano /etc/ssh/sshd_config
+  201  node app.js
+  202  nano app.js
+  203  node app.js
+  204  sudo apt update
+  205  sudo apt install mysql-server -y
+  206  sudo mysql_secure_installation
+  207  sudo systemctl status mysql
+  208  sudo mysql
+  209  sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf
+  210  sudo systemctl restart mysql
+  211  sudo ufw status
+  212  sudo ufw allow 8080
+  213  sudo ufw status
+  214  sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf
+  215  sudo systemctl restart mysql
+  216  mysql -u yhm -h 113.198.66.75 -p
+  217  mysql -u 사용자이름 -p
+  218  mysql -u yhm -p
+  219  mysql -u yhm -h 113.198.66.75 -p
+  220  sudo netstat -tuln | grep 3306
+  221  sudo ufw allow 8080
+  222  sudo ufw reload
+  223  sudo systemctl restart mysql
+  224  sudo netstat -tuln | grep 8080
+  225  mysql -u yhm -h 113.198.66.75 -p
+  226  sudo netstat -tuln | grep 3000
+  227  curl http://localhost:3000
+  228  curl http://113.198.66.75:3000
+  229  curl http://localhost:3000
+  230  sudo netstat -tuln | grep 3000
+  231  curl http://localhost:3000
+  232  node app.js
+  233  sudo netstat -tuln | grep 3000
+  234  nano app.js
+  235  curl http://localhost:3000
+  236  curl http://113.198.66.75:3000
+  237  sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf
+  238  sudo nano app.js
+  239  sudo netstat -tuln | grep 3000
+  240  sudo netstat -tuln
+  241  [200~sudo iptables -t nat -L -n -v
+  242  sudo ufw allow 3000
+  243  sudo lsof -i :3000
+  244  sudo nano app.js
+  245  ps aux | grep node
+  246  node app.js
+  247  sudo netstat -tuln | grep 3000
+  248  node app.js
+  249  sudo nano app.js
+  250  sudo systemctl status mysql
+  251  mysql -u yhm -p
+  252  mysql -u yhm -h 113.198.66.75 8080 -p
+  253  sudo netstat -tuln | grep 3306
+  254  sudo netstat -tuln | grep 8080
+  255  mysql -u yhm -h 113.198.66.75 3306 -p
+  256  sudo ufw allow 3306
+  257  mysql -u yhm -h 113.198.66.75 3306 -p
+  258  nano app.js
+  259  node app.ks
+  260  node app.js
+  261  sudo netstat -tuln | grep 3000
+  262  nano app.js
+  263  node app.js
+  264  sudo ufw delete allow 3306
+  265  sudo ufw status
+  266  sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf
+  267  sudo mysql -u root -p
+  268  sudo mysql -u yhm -p
+  269  sudo mysql -u root -p
+  270  mysql -u yhm -h 113.198.66.75 -p
+  271  sudo ufw allow from 113.198.66.75 to any port 8080
+  272  mysql -u yhm -h 113.198.66.75 -p
+  273  mysql -u root
+  274  sudo mysql -u yhm -p
+  275  mysql -u yhm -h 113.198.66.75 -p
+  276  sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf
+  277  mysql -u yhm -h 113.198.66.75 -p
+  278  sudo mysql -u yhm -p 8080
+  279  sudo netstat -tuln | grep 3000
+  280  sudo netstat -tuln | grep 8080
+  281  mysql -u yhm -h 113.198.66.75 --port=8080 -p 
+  282  node app.js
+  283  mysql -u yhm -h 113.198.66.75 --port=8080 -p
+  284  sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf
+  285  mysql -u yhm -h 113.198.66.75 --port=8080 -p
+  286  sudo netstat -tuln | grep 8080
+  287  sudo systemctl restart mysql
+  288  sudo systemctl status mysql
+  289  sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf
+  290  sudo systemctl status mysql
+  291  sudo systemctl restart mysql
+  292  sudo systemctl status mysql
+  293  sudo netstat -tuln | grep 8080
+  294  mysql -u yhm -h 113.198.66.75 --port=8080 -p
+  295  mysql -u yhm -h 113.198.66.75 -p
+  296  sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf
+  297  sudo systemctl restart mysql
+  298  sudo systemctl status mysql
+  299  mysql -u yhm -h 113.198.66.75 -p
+  300  sudo netstat -tuln | grep 3306
+  301  sudo ufw status
+  302  ufw allow 3306
+  303  sudo ufw allow 3306
+  304  mysql -u yhm -h 113.198.66.75 -p
+  305  sudo ufw status
+  306  mysql -u yhm -p
+  307  mysql -u yhm -h 113.198.66.75 --port=3306 -p
+  308  mysql -u root -p
+  309  mysql -u yhm -h 113.198.66.75 --port=3306 -p
+  310  sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf
+  311  npm install mysql
+  312  sudo nano app.js
+  313  node app.js
+  314  nano app.js
+  315  mkdir config
+  316  cd config
+  317  nano db.js
+  318  cd .
+  319  cd ..
+  320  mkdir routes
+  321  nano api.js
+  322  ls
+  323  mv api.js routes/
+  324  ls
+  325  cd routes
+  326  ls
+  327  nano api.js
+  328  cd ..
+  329  cd config
+  330  ls
+  331  cd ..
+  332  nano app.js
+  333  node app.js
+  334  mysql -u root -p
+  335  sudo ufw status
+  336  cd config
+  337  nano db.js
+  338  node app.js
+  339  cd ..
+  340  node app.js
+  341  nano  app.js
+  342  node app.js
+  343  nano  app.js
+  344  sudo systemctl status mysql
+  345  ls config/
+  346  nano app.js
+  347  node app.js
+  348  history
+  349  history > session_commands.txt
