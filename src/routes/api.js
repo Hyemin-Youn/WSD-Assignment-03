@@ -1,6 +1,7 @@
+//CRUD AIP 라우터
 const express = require('express');
 const router = express.Router();
-const connection = require('../config/db');
+const connection = require('../../config/db');
 
 // GET data from MySQL
 router.get('/data', (req, res) => {
