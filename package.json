@@ -7,6 +7,7 @@
     "cheerio": "^1.0.0",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
+    "json2csv": "^6.0.0-alpha.2",
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.12.0",
     "mongoose": "^8.8.4",
@@ -14,6 +15,7 @@
     "node": "^22.12.0",
     "nvm": "^0.0.4",
     "puppeteer": "^23.10.3",
+    "swagger-ui-express": "^5.0.1",
     "tough-cookie": "^5.0.0"
   },
   "name": "wsd-assignment-03",
