@@ -2,9 +2,10 @@ const { wrapper } = require('axios-cookiejar-support');
 const { CookieJar } = require('tough-cookie');
 const axios = require('axios');
 const cheerio = require('cheerio');
+const express = require('express');
+const Job = require('../models/Job'); // MongoDB 스키마
 
-const router = require('express').Router();
-const Job = require('../models/job'); // MongoDB 스키마
+const router = express.Router();
 
 router.get('/', async (req, res) => {
     const jar = new CookieJar(); // 세션 쿠키 관리

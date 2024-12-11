@@ -1,6 +1,6 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 require('dotenv').config();
 
 const app = express();
@@ -14,10 +14,11 @@ mongoose.connect(process.env.MONGO_URI, {
     .then(() => console.log('MongoDB connected'))
     .catch(err => console.error('MongoDB connection error:', err));
 
-// 미들웨어 설정
+// 미들웨어
 app.use(bodyParser.json());
 
-// 라우트 등록
+// 라우트 설정
+app.use('/api/jobs', require('./src/routes/jobs'));
 app.use('/api/scrape', require('./src/routes/scrape'));
 
 // 기본 라우트
