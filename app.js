@@ -18,8 +18,8 @@ mongoose.connect(process.env.MONGO_URI, {
 .catch(err => console.error('MongoDB connection error:', err));
 
 // 라우트 연결
-app.use('/auth', require('./routes/auth'));
-app.use('/jobs', require('./routes/jobs'));
+app.use('/auth', require('./src/routes/auth'));
+app.use('/jobs', require('./src/routes/jobs'));
 app.use('/applications', require('./routes/applications'));
 
 // Swagger 설정
