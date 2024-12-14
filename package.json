@@ -10,17 +10,18 @@
     "json2csv": "^6.0.0-alpha.2",
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.12.0",
-    "mongoose": "^8.8.4",
+    "mongoose": "^8.9.0",
     "mysql": "^2.18.1",
     "node": "^22.12.0",
     "nvm": "^0.0.4",
     "puppeteer": "^23.10.3",
     "swagger-ui-express": "^5.0.1",
-    "tough-cookie": "^5.0.0"
+    "tough-cookie": "^5.0.0",
+    "yamljs": "^0.3.0"
   },
   "name": "wsd-assignment-03",
   "version": "1.0.0",
-  "main": "app.js",
+  "main": "src/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js",

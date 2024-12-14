@@ -1,18 +1,8 @@
-//CRUD AIP 라우터
 const express = require('express');
 const router = express.Router();
-const connection = require('../../config/db');
 
-// GET data from MySQL
-router.get('/data', (req, res) => {
-  connection.query('SELECT * FROM your_table_name', (err, results) => {
-    if (err) {
-      console.error('Database query error:', err);
-      res.status(500).send('Database error');
-      return;
-    }
-    res.json(results);
-  });
+router.get('/', (req, res) => {
+  res.send('API is working!');
 });
 
 module.exports = router;
