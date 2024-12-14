@@ -10,7 +10,7 @@ const app = express();
 app.use(express.json());
 
 // MongoDB 연결
-mongoose.connect('mongodb://localhost:27017/mydatabase', {
+mongoose.connect('mongodb://0.0.0.0:8080/saramin', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 }).then(() => console.log('MongoDB Connected'))
