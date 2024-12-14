@@ -1,7 +1,7 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
-const User = require('../models/User'); // User 스키마
+const User = require('../models/user'); // User 스키마
 
 const router = express.Router();
 const SECRET_KEY = 'your_secret_key'; // JWT 시크릿 키
