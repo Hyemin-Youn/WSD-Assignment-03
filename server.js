@@ -3,8 +3,8 @@ const mongoose = require('mongoose');
 const swaggerJsDoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 
-const jobRoutes = require('./routes/jobs');
-const authRoutes = require('./routes/auth');
+const jobRoutes = require('./src/routes/jobs');
+const authRoutes = require('./src/routes/auth');
 
 const app = express();
 app.use(express.json());
