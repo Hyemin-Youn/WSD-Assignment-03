@@ -1,27 +1,39 @@
-const axios = require('axios');
-const cheerio = require('cheerio');
+const express = require('express');
+const mongoose = require('mongoose');
+const swaggerJsDoc = require('swagger-jsdoc');
+const swaggerUi = require('swagger-ui-express');
 
-const scrapeSaramin = async () => {
-  try {
-    const response = await axios.get('https://www.saramin.co.kr/zf_user/jobs'); // 사람인 채용공고 URL
-    const html = response.data;
-    const $ = cheerio.load(html);
+const jobRoutes = require('./routes/jobs');
+const authRoutes = require('./routes/auth');
 
-    const jobs = [];
-    $('.item_recruit').each((i, element) => {
-      const title = $(element).find('.job_tit').text().trim();
-      const company = $(element).find('.corp_name').text().trim();
-      const location = $(element).find('.job_condition > a').text().trim();
-      const postedAt = $(element).find('.date').text().trim();
+const app = express();
+app.use(express.json());
 
-      jobs.push({ title, company, location, postedAt });
-    });
+// MongoDB 연결
+mongoose.connect('mongodb://localhost:27017/jobPortal', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+}).then(() => console.log('MongoDB Connected'))
+  .catch(err => console.error(err));
 
-    console.log(jobs);
-    return jobs;
-  } catch (error) {
-    console.error('Error scraping Saramin:', error);
-  }
+// Swagger 설정
+const swaggerOptions = {
+  swaggerDefinition: {
+    info: {
+      title: 'Job Portal API',
+      version: '1.0.0',
+      description: 'API documentation for the job portal',
+    },
+  },
+  apis: ['./routes/*.js'], // API 파일 경로
 };
+const swaggerDocs = swaggerJsDoc(swaggerOptions);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
-scrapeSaramin();
+// 라우트 설정
+app.use('/jobs', jobRoutes);
+app.use('/auth', authRoutes);
+
+// 서버 실행
+const PORT = 3000;
+app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));

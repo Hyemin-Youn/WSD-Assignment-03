@@ -9,8 +9,11 @@ const swaggerOptions = {
       description: 'API documentation for the job portal',
     },
   },
-  apis: ['./routes/*.js'], // API 파일 경로
+  apis: ['./routes/*.js'],
 };
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+
+module.exports = (app) => {
+  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+};
