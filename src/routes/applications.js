@@ -1,4 +1,4 @@
 const express = require('express');
 const router = express.Router();
-router.post('/', (req, res) => res.send('Bookmarks endpoint'));
+router.post('/', (req, res) => res.send('Applications endpoint'));
 module.exports = router;

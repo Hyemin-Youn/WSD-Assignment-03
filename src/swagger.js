@@ -1,22 +1,15 @@
-const swaggerJsDoc = require('swagger-jsdoc');
-
+const swaggerJsdoc = require('swagger-jsdoc');
+const swaggerUi = require('swagger-ui-express');
 const options = {
-  definition: {
-    openapi: '3.0.0',
-    info: {
-      title: 'Job API',
-      version: '1.0.0',
-      description: 'Job management API',
+    definition: {
+        openapi: '3.0.0',
+        info: {
+            title: 'Job API',
+            version: '1.0.0',
+            description: 'API documentation for Job Management System',
+        },
     },
-    servers: [
-      {
-        url: 'http://127.0.0.1:3000',
-      },
-    ],
-  },
-  apis: ['./src/routes/*.js'], // Swagger 문서에 포함할 라우트 경로
+    apis: ['./routes/*.js'],
 };
-
-const swaggerDocs = swaggerJsDoc(options);
-
-module.exports = swaggerDocs;
+const specs = swaggerJsdoc(options);
+module.exports = { swaggerUi, specs };

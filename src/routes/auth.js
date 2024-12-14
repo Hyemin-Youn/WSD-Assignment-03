@@ -1,12 +1,15 @@
 const express = require('express');
 const router = express.Router();
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const User = require('../models/User');
 
-router.post('/login', (req, res) => {
-  res.json({ message: 'Login successful' });
+router.post('/register', async (req, res) => {
+    // Registration logic
 });
 
-router.post('/register', (req, res) => {
-  res.json({ message: 'Registration successful' });
+router.post('/login', async (req, res) => {
+    // Login logic
 });
 
 module.exports = router;
