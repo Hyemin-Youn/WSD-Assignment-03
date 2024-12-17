@@ -69,8 +69,8 @@ async function crawlSaramin(keyword, pages = 10) { // 기본 페이지 수를 10
 }
 
 (async () => {
-  const keywords = ['python', 'java', 'react', 'node', 'spring']; // 여러 키워드 추가
-  const pages = 5; // 각 키워드당 5페이지 크롤링
+  const keywords = ['python', 'java', 'react']; // 여러 키워드 추가
+  const pages = 3; // 각 키워드당 5페이지 크롤링
   let totalJobs = [];
 
   console.log('Starting Saramin job postings crawling...');
