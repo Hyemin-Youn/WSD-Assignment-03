@@ -7,7 +7,7 @@ const fs = require('fs');
  * @param {string} keyword Search keyword
  * @param {number} pages Number of pages to crawl
  */
-async function crawlSaramin(keyword, pages = 1) {
+async function crawlSaramin(keyword, pages = 10) { // 기본 페이지 수를 10으로 늘림
   const jobs = [];
   const headers = {
     'User-Agent':
@@ -20,8 +20,8 @@ async function crawlSaramin(keyword, pages = 1) {
     )}&recruitPage=${page}`;
 
     try {
-      console.log(`Fetching page ${page}...`);
-      const response = await axios.get(url, { headers, timeout: 30000 }); // 타임아웃 설정: 30초
+      console.log(`Fetching page ${page} for keyword "${keyword}"...`);
+      const response = await axios.get(url, { headers, timeout: 30000 }); // 타임아웃 30초
       const $ = cheerio.load(response.data);
 
       $('.item_recruit').each((_, element) => {
@@ -38,9 +38,6 @@ async function crawlSaramin(keyword, pages = 1) {
         const deadline = $(element).find('.job_date .date').text().trim() || '';
         const jobGroup = $(element).find('.job_sector').text().trim() || '';
 
-        // 공고 상세 설명은 링크를 따라가서 추출 가능
-        const description = '';
-
         jobs.push({
           job_group: jobGroup,
           badge: badge,
@@ -48,7 +45,7 @@ async function crawlSaramin(keyword, pages = 1) {
           title: title,
           deadline: deadline,
           address_main: addressMain,
-          address_total: addressMain, // 상세 주소가 없어서 메인 주소와 동일
+          address_total: addressMain,
           experience: experience,
           education: education,
           employment_type: employmentType,
@@ -57,14 +54,14 @@ async function crawlSaramin(keyword, pages = 1) {
           createdAt: new Date().toISOString(),
           crawledAt: new Date().toISOString(),
           url: jobUrl,
-          description: description,
+          description: '',
         });
       });
 
-      console.log(`Page ${page} crawling completed.`);
+      console.log(`Page ${page} for keyword "${keyword}" completed.`);
       await new Promise((resolve) => setTimeout(resolve, 2000)); // 2초 딜레이 추가
     } catch (error) {
-      console.error(`Error on page ${page}:`, error.message);
+      console.error(`Error on page ${page} for keyword "${keyword}":`, error.message);
     }
   }
 
@@ -72,20 +69,24 @@ async function crawlSaramin(keyword, pages = 1) {
 }
 
 (async () => {
-  const keyword = 'python'; // 검색할 키워드
-  const pages = 2; // 크롤링할 페이지 수
+  const keywords = ['python', 'java', 'react', 'node', 'spring']; // 여러 키워드 추가
+  const pages = 5; // 각 키워드당 5페이지 크롤링
+  let totalJobs = [];
 
   console.log('Starting Saramin job postings crawling...');
   try {
-    const jobResults = await crawlSaramin(keyword, pages);
-
-    if (jobResults.length > 0) {
-      console.log('Crawling Results:', jobResults);
-      fs.writeFileSync('saramin_jobs.json', JSON.stringify(jobResults, null, 2), 'utf8');
-      console.log('Crawling results saved to saramin_jobs.json file.');
-    } else {
-      console.log('No job postings found.');
+    for (const keyword of keywords) {
+      const jobResults = await crawlSaramin(keyword, pages);
+      totalJobs = totalJobs.concat(jobResults);
     }
+
+    // 중복 제거 (URL을 기준으로)
+    const uniqueJobs = Array.from(new Set(totalJobs.map((job) => job.url)))
+      .map((url) => totalJobs.find((job) => job.url === url));
+
+    console.log(`Total jobs crawled: ${uniqueJobs.length}`);
+    fs.writeFileSync('saramin_jobs.json', JSON.stringify(uniqueJobs, null, 2), 'utf8');
+    console.log('Crawling results saved to saramin_jobs.json file.');
   } catch (error) {
     console.error('Critical Error:', error.message);
   }
