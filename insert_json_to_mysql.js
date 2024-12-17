@@ -5,10 +5,10 @@ const mysql = require('mysql2/promise');
   try {
     // 1. MySQL 연결 설정
     const connection = await mysql.createConnection({
-      host: 'localhost',
-      user: 'your_mysql_username',   // MySQL 사용자 이름
-      password: 'your_mysql_password', // 비밀번호
-      database: 'your_database_name'  // 데이터베이스 이름
+      host: '0.0.0.0:8080',
+      user: 'yhm',   // MySQL 사용자 이름
+      password: 'MySQL@Secure02', // 비밀번호
+      database: 'saramin'  // 데이터베이스 이름
     });
 
     console.log('Connected to the MySQL database.');
