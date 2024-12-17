@@ -7,7 +7,7 @@ const fs = require('fs');
  * @param {string} keyword Search keyword
  * @param {number} pages Number of pages to crawl
  */
-async function crawlSaramin(keyword, pages = 10) { // 기본 페이지 수를 10으로 늘림
+async function crawlSaramin(keyword, pages = 5) {
   const jobs = [];
   const headers = {
     'User-Agent':
@@ -20,23 +20,32 @@ async function crawlSaramin(keyword, pages = 10) { // 기본 페이지 수를 10
     )}&recruitPage=${page}`;
 
     try {
-      console.log(`Fetching page ${page} for keyword "${keyword}"...`);
-      const response = await axios.get(url, { headers, timeout: 30000 }); // 타임아웃 30초
+      console.log(`Fetching page ${page}...`);
+      const response = await axios.get(url, { headers, timeout: 30000 });
       const $ = cheerio.load(response.data);
 
+      // 채용 공고 목록을 순회하며 정보 추출
       $('.item_recruit').each((_, element) => {
         const companyName = $(element).find('.corp_name a').text().trim();
         const title = $(element).find('.job_tit a').text().trim();
         const jobUrl =
           'https://www.saramin.co.kr' + $(element).find('.job_tit a').attr('href');
+        const jobGroup = $(element).find('.job_sector').text().trim() || '';
         const badge = $(element).find('.area_badge .badge').text().trim() || '';
         const conditions = $(element).find('.job_condition span');
         const addressMain = $(conditions[0]).text().trim() || '';
         const experience = $(conditions[1]).text().trim() || '';
         const education = $(conditions[2]).text().trim() || '';
         const employmentType = $(conditions[3]).text().trim() || '';
+        const salary = $(conditions[4]).text().trim() || ''; // 정확한 급여 추출
         const deadline = $(element).find('.job_date .date').text().trim() || '';
-        const jobGroup = $(element).find('.job_sector').text().trim() || '';
+
+        // 기술 스택 추출: job_sector 하위 a 태그
+        const techStack = $(element)
+          .find('.job_sector a')
+          .map((_, el) => $(el).text().trim())
+          .get()
+          .join(', ');
 
         jobs.push({
           job_group: jobGroup,
@@ -49,8 +58,8 @@ async function crawlSaramin(keyword, pages = 10) { // 기본 페이지 수를 10
           experience: experience,
           education: education,
           employment_type: employmentType,
-          salary: '',
-          tech_stack: '',
+          salary: salary,
+          tech_stack: techStack, // 기술 스택
           createdAt: new Date().toISOString(),
           crawledAt: new Date().toISOString(),
           url: jobUrl,
@@ -58,10 +67,10 @@ async function crawlSaramin(keyword, pages = 10) { // 기본 페이지 수를 10
         });
       });
 
-      console.log(`Page ${page} for keyword "${keyword}" completed.`);
+      console.log(`Page ${page} crawling completed.`);
       await new Promise((resolve) => setTimeout(resolve, 2000)); // 2초 딜레이 추가
     } catch (error) {
-      console.error(`Error on page ${page} for keyword "${keyword}":`, error.message);
+      console.error(`Error on page ${page}:`, error.message);
     }
   }
 
@@ -69,24 +78,20 @@ async function crawlSaramin(keyword, pages = 10) { // 기본 페이지 수를 10
 }
 
 (async () => {
-  const keywords = ['python', 'java', 'react']; // 여러 키워드 추가
-  const pages = 3; // 각 키워드당 5페이지 크롤링
-  let totalJobs = [];
+  const keyword = '파이썬'; // 검색 키워드
+  const pages = 5; // 크롤링할 페이지 수
 
   console.log('Starting Saramin job postings crawling...');
   try {
-    for (const keyword of keywords) {
-      const jobResults = await crawlSaramin(keyword, pages);
-      totalJobs = totalJobs.concat(jobResults);
+    const jobResults = await crawlSaramin(keyword, pages);
+
+    if (jobResults.length > 0) {
+      console.log(`Total jobs crawled: ${jobResults.length}`);
+      fs.writeFileSync('saramin_jobs.json', JSON.stringify(jobResults, null, 2), 'utf8');
+      console.log('Crawling results saved to saramin_jobs.json file.');
+    } else {
+      console.log('No job postings found.');
     }
-
-    // 중복 제거 (URL을 기준으로)
-    const uniqueJobs = Array.from(new Set(totalJobs.map((job) => job.url)))
-      .map((url) => totalJobs.find((job) => job.url === url));
-
-    console.log(`Total jobs crawled: ${uniqueJobs.length}`);
-    fs.writeFileSync('saramin_jobs.json', JSON.stringify(uniqueJobs, null, 2), 'utf8');
-    console.log('Crawling results saved to saramin_jobs.json file.');
   } catch (error) {
     console.error('Critical Error:', error.message);
   }
