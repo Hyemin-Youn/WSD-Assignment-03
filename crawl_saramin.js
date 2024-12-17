@@ -60,7 +60,10 @@ async function crawlSaramin(keyword, pages = 5) {
           employment_type: employmentType,
           salary: salary,
           tech_stack: techStack, // 기술 스택
+          createdAt: new Date().toISOString(),
+          crawledAt: new Date().toISOString(),
           url: jobUrl,
+          description: '',
         });
       });
 
