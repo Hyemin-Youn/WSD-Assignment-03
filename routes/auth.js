@@ -1,120 +1,144 @@
 const express = require('express');
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
-const User = require('../models/user'); // User 스키마
-
 const router = express.Router();
-const SECRET_KEY = 'your_secret_key'; // JWT 시크릿 키
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const pool = require('../db'); // DB 연결 풀 가져오기
 
+const JWT_SECRET = 'your-secret-key'; // 환경 변수로 관리하는 것이 좋습니다.
+
+/**
+ * @swagger
+ * /auth/register:
+ *   post:
+ *     summary: 회원 가입 API
+ *     tags: [Auth]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 description: 사용자 이메일
+ *                 example: test@example.com
+ *               password:
+ *                 type: string
+ *                 description: 사용자 비밀번호
+ *                 example: password123
+ *               name:
+ *                 type: string
+ *                 description: 사용자 이름
+ *                 example: John Doe
+ *     responses:
+ *       201:
+ *         description: 회원가입 성공
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: 회원가입 성공
+ *                 userId:
+ *                   type: integer
+ *                   example: 1
+ *       400:
+ *         description: 필드 누락
+ *       500:
+ *         description: 서버 오류
+ */
 // 회원가입
 router.post('/register', async (req, res) => {
-    try {
-        const { email, password } = req.body;
+  const { email, password, name } = req.body;
 
-        // 입력 데이터 유효성 검사
-        if (!email || !password) {
-            return res.status(400).json({ error: 'Email and password are required' });
-        }
+  if (!email || !password || !name) {
+    return res.status(400).json({ error: '모든 필드를 입력해주세요.' });
+  }
 
-        // 이메일 중복 검사
-        const existingUser = await User.findOne({ email });
-        if (existingUser) {
-            return res.status(409).json({ error: 'Email is already registered' });
-        }
-
-        // 비밀번호 암호화
-        const hashedPassword = await bcrypt.hash(password, 10);
-
-        // 사용자 생성 및 저장
-        const newUser = new User({ email, password: hashedPassword });
-        await newUser.save();
-
-        res.status(201).json({ message: 'User registered successfully' });
-    } catch (error) {
-        res.status(500).json({ error: 'Failed to register user' });
-    }
+  try {
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const sql = 'INSERT INTO users (email, password, name) VALUES (?, ?, ?)';
+    const [result] = await pool.execute(sql, [email, hashedPassword, name]);
+    res.status(201).json({ message: '회원가입 성공', userId: result.insertId });
+  } catch (err) {
+    console.error('회원가입 오류:', err.message);
+    res.status(500).json({ error: '서버 오류' });
+  }
 });
 
+/**
+ * @swagger
+ * /auth/login:
+ *   post:
+ *     summary: 로그인 API
+ *     tags: [Auth]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 description: 사용자 이메일
+ *                 example: test@example.com
+ *               password:
+ *                 type: string
+ *                 description: 사용자 비밀번호
+ *                 example: password123
+ *     responses:
+ *       200:
+ *         description: 로그인 성공
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: 로그인 성공
+ *                 token:
+ *                   type: string
+ *                   example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+ *       400:
+ *         description: 필드 누락
+ *       401:
+ *         description: 인증 실패
+ *       500:
+ *         description: 서버 오류
+ */
 // 로그인
 router.post('/login', async (req, res) => {
-    try {
-        const { email, password } = req.body;
+  const { email, password } = req.body;
 
-        // 입력 데이터 유효성 검사
-        if (!email || !password) {
-            return res.status(400).json({ error: 'Email and password are required' });
-        }
+  if (!email || !password) {
+    return res.status(400).json({ error: '이메일과 비밀번호를 입력해주세요.' });
+  }
 
-        // 사용자 확인
-        const user = await User.findOne({ email });
-        if (!user) {
-            return res.status(404).json({ error: 'User not found' });
-        }
+  try {
+    const sql = 'SELECT * FROM users WHERE email = ?';
+    const [rows] = await pool.execute(sql, [email]);
 
-        // 비밀번호 확인
-        const isPasswordValid = await bcrypt.compare(password, user.password);
-        if (!isPasswordValid) {
-            return res.status(401).json({ error: 'Invalid password' });
-        }
-
-        // JWT 토큰 생성
-        const token = jwt.sign({ userId: user._id }, SECRET_KEY, { expiresIn: '1h' });
-        res.status(200).json({ message: 'Login successful', token });
-    } catch (error) {
-        res.status(500).json({ error: 'Failed to log in' });
-    }
-});
-
-// JWT 인증 미들웨어
-const authenticateToken = (req, res, next) => {
-    const token = req.header('Authorization')?.split(' ')[1]; // Bearer 토큰
-    if (!token) {
-        return res.status(401).json({ error: 'Access Denied: No Token Provided' });
+    if (rows.length === 0) {
+      return res.status(401).json({ error: '이메일 또는 비밀번호가 잘못되었습니다.' });
     }
 
-    try {
-        const verified = jwt.verify(token, SECRET_KEY);
-        req.user = verified;
-        next();
-    } catch (error) {
-        res.status(403).json({ error: 'Invalid Token' });
+    const user = rows[0];
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(401).json({ error: '이메일 또는 비밀번호가 잘못되었습니다.' });
     }
-};
 
-// 인증된 사용자 정보 조회
-router.get('/profile', authenticateToken, async (req, res) => {
-    try {
-        const user = await User.findById(req.user.userId).select('-password'); // 비밀번호 제외
-        if (!user) {
-            return res.status(404).json({ error: 'User not found' });
-        }
-        res.status(200).json({ user });
-    } catch (error) {
-        res.status(500).json({ error: 'Failed to fetch user profile' });
-    }
-});
-
-// 사용자 정보 수정
-router.put('/profile', authenticateToken, async (req, res) => {
-    try {
-        const { email, password } = req.body;
-
-        // 새 비밀번호 암호화
-        let updatedFields = { email };
-        if (password) {
-            updatedFields.password = await bcrypt.hash(password, 10);
-        }
-
-        const updatedUser = await User.findByIdAndUpdate(
-            req.user.userId,
-            updatedFields,
-            { new: true }
-        ).select('-password'); // 비밀번호 제외
-
-        res.status(200).json({ message: 'User profile updated', user: updatedUser });
-    } catch (error) {
-        res.status(500).json({ error: 'Failed to update user profile' });
-    }
+    const token = jwt.sign({ userId: user.id }, JWT_SECRET, { expiresIn: '1h' });
+    res.json({ message: '로그인 성공', token });
+  } catch (err) {
+    console.error('로그인 오류:', err.message);
+    res.status(500).json({ error: '서버 오류' });
+  }
 });
 
 module.exports = router;
